@@ -56,11 +56,11 @@ python manage.py runserver
 ```
 Campo	            Tipo	                    Descrição
 
-id	            BigAutoField	        Chave primária automática
-user	            CharField	        Identificador do usuário (A ou B)
-question	    TextField	            Mensagem enviada pelo usuário
-response	    TextField	            Resposta do chatbot
-created_at	    DateTimeField	        Data e hora de criação (automático)
+id	            BigAutoField	        Chave primária automática.
+user	        CharField	            Identificador do usuário (A ou B).
+question	    TextField	            Mensagem enviada pelo usuário.
+response	    TextField	            Resposta do chatbot.
+created_at	    DateTimeField	        Data e hora de criação (automático).
 
 ```
 #
@@ -161,7 +161,6 @@ GET /api/chat/history/A/
 Chatbot_de_atendimento_simulado_backend/
 ├── chat/                          
 │   ├── migrations/               
-│   ├── __init__.py
 │   ├── admin.py                  
 │   ├── apps.py                   
 │   ├── models.py                 
@@ -187,5 +186,33 @@ Chatbot_de_atendimento_simulado_backend/
 * Resposta do chatbot
 * Timestamp da interação
 
+# Decisão de Arquitetura 
 
+### Decisão: Um único modelo Message para representar toda a conversação. 
 
+### Justificativa: 
+* Simplicidade: Para um MVP, um modelo único atende todos os requisitos
+
+* Performance: Menos joins no banco de dados
+
+* Manutenção: Fácil de entender e modificar
+
+* Escalabilidade: Pode evoluir para relacionamentos mais complexos se necessário
+
+### Decisão: Usar @api_view em vez de Class-Based Views. 
+
+### Justificativa: 
+* Clareza: Código mais explícito e fácil de seguir
+
+* Simplicidade: Para endpoints simples, functions são mais diretas
+
+* Manutenção: Debug mais fácil e menos "magia" do framework 
+
+### Decisao: Usar ModelSerializer para o histórico. 
+
+### Justificativa: 
+* Consistência: Garante formato padronizado nas respostas
+
+* Validação: Facilita a validação de dados se necessário no futuro
+
+* Flexibilidade: Fácil de customizar campos sem alterar o modelo

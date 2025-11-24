@@ -1,7 +1,7 @@
 from rest_framework.response import Response
 from rest_framework.decorators import api_view
 from .models import Message
-from .serial_json import MessageSerializer
+from .serializers import MessageSerializer
 
 @api_view(["POST"])
 def send_message(request):

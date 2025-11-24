@@ -1,9 +1,7 @@
 from django.urls import path
-from .views import ChatView, HistoryView
+from .views import send_message, get_history
 
 urlpatterns = [
-    
-    path('chat/', ChatView.as_view(), name='send_message'),
-    
-    path('history/<str:user_profile>/', HistoryView.as_view(), name='get_history'),
+    path("send/", send_message),
+    path("history/<str:user_id>/", get_history),
 ]
